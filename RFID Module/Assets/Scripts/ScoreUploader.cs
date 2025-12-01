@@ -66,6 +66,8 @@ public class ScoreData
     public int game2;
     public int game3;
     public int game4;
+    public int game5;
+    public int game6;
     public int gameId;
 
     public ScoreData(string rfid, int gID, int score)
@@ -86,6 +88,14 @@ public class ScoreData
         else if (gID == 3)
         {
             game4 = score;
+        }
+        else if (gID == 4)
+        {
+            game5 = score;
+        }
+        else if (gID == 5)
+        {
+            game6 = score;
         }
     }    
 }
