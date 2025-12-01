@@ -12,7 +12,8 @@ public class ScoreUploader : MonoBehaviour
 
     public TMP_InputField rfid_IF;
     public TMP_InputField score_IF;
-    public int gameID = 0; 
+    public int gameID = 0;
+    public Slider scoreSlider;
 
     public void SendScore()
     {
@@ -45,6 +46,11 @@ public class ScoreUploader : MonoBehaviour
             Debug.LogError("POST Failed: " + request.error + "\nResponse: " + request.downloadHandler.text);
         }
     }
+
+    public void SyncSliderWithIF()
+    {
+        score_IF.text = scoreSlider.value.ToString();
+    }
 }
 
 [System.Serializable]
@@ -76,5 +82,5 @@ public class ScoreData
         {
             game4 = score;
         }
-    }
+    }    
 }
