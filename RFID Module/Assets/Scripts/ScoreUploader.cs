@@ -14,6 +14,7 @@ public class ScoreUploader : MonoBehaviour
     public TMP_InputField score_IF;
     public int gameID = 0;
     public Slider scoreSlider;
+    public TMP_Dropdown gameIDDropdown;
 
     public void SendScore()
     {
@@ -50,6 +51,10 @@ public class ScoreUploader : MonoBehaviour
     public void SyncSliderWithIF()
     {
         score_IF.text = scoreSlider.value.ToString();
+    }
+    public void SyncDropDownWithGID()
+    {
+        gameID = gameIDDropdown.value;
     }
 }
 
