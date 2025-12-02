@@ -12,9 +12,28 @@ public class ScoreUploader : MonoBehaviour
 
     public TMP_InputField rfid_IF;
     public TMP_InputField score_IF;
-    public int gameID = 0;
+    private int gameID = 0;
     public Slider scoreSlider;
     public TMP_Dropdown gameIDDropdown;
+    public Button submitButton;
+    private void Start()
+    {
+        rfid_IF.ActivateInputField();
+        score_IF.interactable = false;
+        scoreSlider.interactable = false;
+        submitButton.interactable = false;
+    }
+
+    public void RFID_InputCheck()
+    {
+        if(rfid_IF.text.Length == 10)
+        {
+            score_IF.interactable = true;
+            //score_IF.ActivateInputField();
+            scoreSlider.interactable = true;
+            submitButton.interactable = true;
+        }
+    }
 
     public void SendScore()
     {
