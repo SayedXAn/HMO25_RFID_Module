@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +16,8 @@ public class ScoreUploader : MonoBehaviour
     public Slider scoreSlider;
     public TMP_Dropdown gameIDDropdown;
     public Button submitButton;
+    public TMP_Text statusText;
+
     private void Start()
     {
         rfid_IF.ActivateInputField();
@@ -56,6 +58,7 @@ public class ScoreUploader : MonoBehaviour
         jsonBody += "}";
 
         Debug.Log("Sending: " + jsonBody);
+        statusText.text = "Posting score...";
 
         UnityWebRequest request = new UnityWebRequest(url, "POST");
         byte[] jsonToSend = Encoding.UTF8.GetBytes(jsonBody);
@@ -70,12 +73,22 @@ public class ScoreUploader : MonoBehaviour
         if (request.result == UnityWebRequest.Result.Success)
         {
             Debug.Log("POST Success: " + request.downloadHandler.text);
+            statusText.text = "Score updated successfully!";
+            statusText.color = Color.green;
         }
         else
         {
             Debug.LogError("POST Failed: " + request.error + "\nResponse: " + request.downloadHandler.text);
+
+            statusText.text = "Failed to update score!";
+            statusText.color = Color.red;
         }
+
+        // Optional: fade out after 3 seconds
+        yield return new WaitForSeconds(3);
+        statusText.text = "";
     }
+
 
 
     public void SyncSliderWithIF()
