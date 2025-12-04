@@ -42,8 +42,19 @@ public class ScoreUploader : MonoBehaviour
 
     IEnumerator PostScore(string rfid, int gID, int score)
     {
-        // Create JSON body
-        string jsonBody = JsonUtility.ToJson(new ScoreData(rfid, gID, score));
+        // Build JSON manually
+        string jsonBody = "{";
+        jsonBody += "\"RFID\":\"" + rfid + "\",";
+
+        if (gID == 0) jsonBody += "\"game1\":" + score;
+        if (gID == 1) jsonBody += "\"game2\":" + score;
+        if (gID == 2) jsonBody += "\"game3\":" + score;
+        if (gID == 3) jsonBody += "\"game4\":" + score;
+        if (gID == 4) jsonBody += "\"game5\":" + score;
+        if (gID == 5) jsonBody += "\"game6\":" + score;
+
+        jsonBody += "}";
+
         Debug.Log("Sending: " + jsonBody);
 
         UnityWebRequest request = new UnityWebRequest(url, "POST");
@@ -51,7 +62,6 @@ public class ScoreUploader : MonoBehaviour
         request.uploadHandler = new UploadHandlerRaw(jsonToSend);
         request.downloadHandler = new DownloadHandlerBuffer();
 
-        // Set headers
         request.SetRequestHeader("Content-Type", "application/json");
         request.SetRequestHeader("x-token", token);
 
@@ -66,6 +76,7 @@ public class ScoreUploader : MonoBehaviour
             Debug.LogError("POST Failed: " + request.error + "\nResponse: " + request.downloadHandler.text);
         }
     }
+
 
     public void SyncSliderWithIF()
     {
