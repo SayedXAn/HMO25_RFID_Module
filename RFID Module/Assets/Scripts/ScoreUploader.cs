@@ -12,7 +12,7 @@ public class ScoreUploader : MonoBehaviour
 
     public TMP_InputField rfid_IF;
     public TMP_InputField score_IF;
-    private int gameID = 0;
+    private int gameID = 3; //3 for vr
     public Slider scoreSlider;
     public TMP_Dropdown gameIDDropdown;
     public Button submitButton;
@@ -34,6 +34,8 @@ public class ScoreUploader : MonoBehaviour
             //score_IF.ActivateInputField();
             scoreSlider.interactable = true;
             submitButton.interactable = true;
+            SyncSliderWithIF();
+            //SyncDropDownWithGID();
         }
     }
 
@@ -95,10 +97,10 @@ public class ScoreUploader : MonoBehaviour
     {
         score_IF.text = scoreSlider.value.ToString();
     }
-    public void SyncDropDownWithGID()
-    {
-        gameID = gameIDDropdown.value;
-    }
+    //public void SyncDropDownWithGID()
+    //{
+    //    gameID = gameIDDropdown.value;
+    //}
 }
 
 [System.Serializable]
